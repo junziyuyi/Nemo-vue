@@ -10,11 +10,11 @@ export function formatCurrency(num) {
 /**
  * @param {number} num
  */
-exports.formatMoment = (data, format = "YYYY-MM-DD") => {
+export function formatMoment(data, format = "YYYY-MM-DD") {
   let v = window.$Vue;
   if (data) {
     return v.moment(data).format(format);
   } else {
     return "";
   }
-};
+}

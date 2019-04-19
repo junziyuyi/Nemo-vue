@@ -25,7 +25,7 @@ export default new Router({
           }
         },
         {
-          path: "*",
+          path: "order/*",
           name: "order",
           meta: {
             auth: true
@@ -35,6 +35,13 @@ export default new Router({
           }
         }
       ]
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: resolve => {
+        require(["@/views/login.vue"], resolve);
+      }
     }
   ]
 });
