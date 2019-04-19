@@ -7,6 +7,7 @@ import VueMoment from "vue-moment";
 import "normalize.css/normalize.css";
 import "@/assets/styles/element-variables.scss";
 import "@/assets/styles/index.scss"; // global css
+import "element-ui/lib/theme-chalk/index.css";
 
 import App from "./App.vue";
 import * as filters from "@/filters/index";
