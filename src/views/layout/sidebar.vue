@@ -3,21 +3,24 @@
     <!-- <logo v-if="showLogo" :collapse="isCollapse" /> -->
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
+        class="menu"
         :default-active="activeMenu"
         :collapse="isCollapse"
-        :background-color="variables.menuBg"
-        :text-color="variables.menuText"
+        :background-color="variables.MenuBG"
+        :text-color="variables.MenuText"
         :unique-opened="false"
-        :active-text-color="variables.menuActiveText"
+        :active-text-color="variables.MenuActiveTxt"
         :collapse-transition="false"
         mode="vertical"
+        router
       >
-        <sidebar-item
+        <!-- <sidebar-item
           v-for="route in permission_routes"
           :key="route.path"
           :item="route"
           :base-path="route.path"
-        />
+        />-->
+        <sidebar-item />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -27,12 +30,12 @@
 // import { mapGetters } from "vuex";
 // import Logo from "./Logo";
 import SidebarItem from "./SidebarItem";
-import variables from "@/styles/variables.scss";
+import variables from "@/assets/styles/color.scss";
 
 export default {
   components: { SidebarItem },
   computed: {
-    ...mapGetters(["permission_routes", "sidebar"]),
+    // ...mapGetters(["permission_routes", "sidebar"]),
     activeMenu() {
       const route = this.$route;
       const { meta, path } = route;
@@ -43,14 +46,19 @@ export default {
       return path;
     },
     showLogo() {
-      return this.$store.state.settings.sidebarLogo;
+      // return this.$store.state.settings.sidebarLogo;
     },
     variables() {
       return variables;
     },
     isCollapse() {
-      return !this.sidebar.opened;
+      // return !this.sidebar.opened;
     }
   }
 };
 </script>
+<style lang="scss" scoped>
+.menu {
+  border-right: 0;
+}
+</style>

@@ -1,11 +1,17 @@
 <template>
   <div class="login">
     <div class="login-bg">
-      <img src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-761372.jpg" alt>
+      <img
+        src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-761372.jpg"
+        alt
+      />
     </div>
     <div class="login-content clearfix">
       <div class="login-adv-pic fl">
-        <img src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-761372.jpg" alt>
+        <img
+          src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-761372.jpg"
+          alt
+        />
       </div>
       <div class="login-info fl">
         <div class="title">后台管理系统</div>
@@ -18,10 +24,18 @@
             label-width="60px"
           >
             <el-form-item label="用户名" prop="userName">
-              <el-input name="userName" v-model="loginForm.userName" placeholder="请输入用户名"></el-input>
+              <el-input
+                name="userName"
+                v-model="loginForm.userName"
+                placeholder="请输入用户名"
+              ></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="pass">
-              <el-input name="userName" v-model="loginForm.pass" placeholder="请输入密码"></el-input>
+              <el-input
+                name="userName"
+                v-model="loginForm.pass"
+                placeholder="请输入密码"
+              ></el-input>
             </el-form-item>
             <el-form-item label="验证码" v-if="0">
               <el-input
@@ -37,7 +51,8 @@
                 type="primary"
                 class="el-button el-button--primary el-button--small"
                 @click="doLogin('loginForm')"
-              >提交</el-button>
+                >提交</el-button
+              >
             </div>
           </el-form>
           <div class="text-right signin">去注册</div>

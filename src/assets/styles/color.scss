@@ -12,7 +12,13 @@ $black:#333;
 
 // sidebar
 $menuText:#bfcbd9;
+$menuBG: #324157;
+$menuActiveBG: #324157;
+$menuActiveTxt:#20a0ff;
+
 
 :export {
-  menuText: $menuText;
+  MenuText: $menuText;
+  MenuBG: $menuBG;
+  MenuActiveTxt: $menuActiveTxt
 }
