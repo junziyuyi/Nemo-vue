@@ -12,8 +12,8 @@
   </el-container>
 </template>
 <script>
-import Sidebar from "./Sidebar.vue";
 import Header from "./Header.vue";
+import Sidebar from "./sidebar.vue";
 export default {
   components: { Sidebar }
 };
