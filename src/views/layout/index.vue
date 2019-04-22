@@ -4,7 +4,7 @@
       <Sidebar />
     </el-aside>
     <el-container>
-      <el-header>Header</el-header>
+      <el-header><Header /></el-header>
       <el-main>
         <router-view />
       </el-main>
@@ -13,6 +13,7 @@
 </template>
 <script>
 import Sidebar from "./Sidebar.vue";
+import Header from "./Header.vue";
 export default {
   components: { Sidebar }
 };
