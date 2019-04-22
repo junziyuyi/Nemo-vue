@@ -12,7 +12,7 @@
   </el-container>
 </template>
 <script>
-import Sidebar from "./Sidebar.vue";
+import Sidebar from "./sidebar.vue";
 export default {
   components: { Sidebar }
 };

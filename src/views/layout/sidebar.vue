@@ -1,18 +1,17 @@
 <template>
-  <div :class="{ 'has-logo': showLogo }">
+  <!-- <div :class="{ 'has-logo': showLogo }"> -->
+  <div>
     <!-- <logo v-if="showLogo" :collapse="isCollapse" /> -->
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         class="menu"
-        :default-active="activeMenu"
-        :collapse="isCollapse"
+        :default-active="'0'"
         :background-color="variables.MenuBG"
         :text-color="variables.MenuText"
         :unique-opened="false"
         :active-text-color="variables.MenuActiveTxt"
         :collapse-transition="false"
         mode="vertical"
-        router
       >
         <!-- <sidebar-item
           v-for="route in permission_routes"
@@ -36,24 +35,24 @@ export default {
   components: { SidebarItem },
   computed: {
     // ...mapGetters(["permission_routes", "sidebar"]),
-    activeMenu() {
-      const route = this.$route;
-      const { meta, path } = route;
-      // if set path, the sidebar will highlight the path you set
-      if (meta.activeMenu) {
-        return meta.activeMenu;
-      }
-      return path;
-    },
-    showLogo() {
-      // return this.$store.state.settings.sidebarLogo;
-    },
+    // activeMenu() {
+    // const route = this.$route;
+    // const { meta, path } = route;
+    // if set path, the sidebar will highlight the path you set
+    // if (meta.activeMenu) {
+    //   return meta.activeMenu;
+    // }
+    // return path;
+    // },
+    // showLogo() {
+    // return this.$store.state.settings.sidebarLogo;
+    // },
     variables() {
       return variables;
-    },
-    isCollapse() {
-      // return !this.sidebar.opened;
     }
+    // isCollapse() {
+    // return !this.sidebar.opened;
+    // }
   }
 };
 </script>

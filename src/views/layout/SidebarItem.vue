@@ -18,25 +18,29 @@
                 v-for="threeMenu in subMenu.subs"
                 :key="threeMenu.Index"
                 :index="threeMenu.Index"
-                route
-                >{{ threeMenu.Index }}</el-menu-item
               >
+                <router-link :to="threeMenu.Path">{{
+                  threeMenu.Title
+                }}</router-link>
+              </el-menu-item>
             </el-submenu>
-            <el-menu-item
-              v-else
-              :index="subMenu.Index"
-              :key="subMenu.Index"
-              route
-              >{{ subMenu.Title }}</el-menu-item
-            >
+            <div v-else>
+              <router-link :to="subMenu.Path">
+                <el-menu-item :index="subMenu.Index" :key="subMenu.Index">{{
+                  subMenu.Title
+                }}</el-menu-item>
+              </router-link>
+            </div>
           </div>
         </el-submenu>
       </div>
       <div v-else>
-        <el-menu-item :index="menu.Index" :key="menu.Index">
-          <i :class="menu.Icon"></i>
-          <span>{{ menu.Title }}</span>
-        </el-menu-item>
+        <router-link :to="menu.Path">
+          <el-menu-item :index="menu.Index" :key="menu.Index">
+            <i :class="menu.Icon"></i>
+            <span>{{ menu.Title }}</span>
+          </el-menu-item>
+        </router-link>
       </div>
     </div>
   </div>
@@ -49,12 +53,14 @@ export default {
         {
           Icon: "el-icon-menu",
           Title: "系统首页",
-          Index: "0"
+          Index: "0",
+          Path: "/home"
         },
         {
           Icon: "el-icon-menu",
-          Title: "wap端维护",
-          Index: "1"
+          Title: "站点维护",
+          Index: "1",
+          Path: "/site"
         },
         {
           Icon: "el-icon-menu",
@@ -63,19 +69,23 @@ export default {
           Subs: [
             {
               Title: "商品列表",
-              Index: "2-0"
+              Index: "2-0",
+              Path: "/goods/list"
             },
             {
               Title: "新增商品",
-              Index: "2-1"
+              Index: "2-1",
+              Path: "/goods/add"
             },
             {
               Title: "商品分类",
-              Index: "2-2"
+              Index: "2-2",
+              Path: "/goods/category"
             },
             {
               Title: "商品单位",
-              Index: "2-3"
+              Index: "2-3",
+              Path: "/goods/unit"
             }
           ]
         },
@@ -86,11 +96,13 @@ export default {
           Subs: [
             {
               Title: "订单列表",
-              Index: "3-0"
+              Index: "3-0",
+              Path: "/order/list"
             },
             {
               Title: "退货列表",
-              Index: "3-1"
+              Index: "3-1",
+              Path: "/order/returnList"
             }
           ]
         }
