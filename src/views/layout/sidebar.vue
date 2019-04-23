@@ -11,6 +11,7 @@
         :unique-opened="false"
         :active-text-color="variables.MenuActiveTxt"
         :collapse-transition="false"
+        :collapse="isCollapse"
         mode="vertical"
       >
         <!-- <sidebar-item
@@ -19,7 +20,7 @@
           :item="route"
           :base-path="route.path"
         />-->
-        <sidebar-item />
+        <sidebar-item/>
       </el-menu>
     </el-scrollbar>
   </div>
@@ -30,8 +31,14 @@
 // import Logo from "./Logo";
 import SidebarItem from "./SidebarItem";
 import variables from "@/assets/styles/color.scss";
+import Bus from "@/utils/bus.js";
 
 export default {
+  data() {
+    return {
+      isCollapse: false
+    };
+  },
   components: { SidebarItem },
   computed: {
     // ...mapGetters(["permission_routes", "sidebar"]),
@@ -50,9 +57,11 @@ export default {
     variables() {
       return variables;
     }
-    // isCollapse() {
-    // return !this.sidebar.opened;
-    // }
+  },
+  created() {
+    Bus.$on("menuFold", menuFold => {
+      this.isCollapse = menuFold;
+    });
   }
 };
 </script>

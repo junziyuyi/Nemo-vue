@@ -1,47 +1,33 @@
 <template>
   <div class="sidebar-item">
     <div v-for="menu in menus" :key="menu.Index">
-      <div v-if="menu.Subs">
+      <template v-if="menu.Subs">
         <el-submenu :index="menu.Index" :key="menu.Index">
           <template slot="title">
-            <i :class="menu.Icon"></i>
-            <span>{{ menu.Title }}</span>
+            <i :class="menu.Icon"></i><span>{{ menu.Title }}</span>
           </template>
           <div v-for="subMenu in menu.Subs" :key="subMenu.Index">
-            <el-submenu
-              v-if="subMenu.Subs"
-              :index="subMenu.Index"
-              :key="subMenu.Index"
-            >
+            <el-submenu v-if="subMenu.Subs" :index="subMenu.Index" :key="subMenu.Index">
               <template slot="title">{{ subMenu.Title }}</template>
-              <el-menu-item
-                v-for="threeMenu in subMenu.subs"
-                :key="threeMenu.Index"
-                :index="threeMenu.Index"
-              >
-                <router-link :to="threeMenu.Path">{{
-                  threeMenu.Title
-                }}</router-link>
+              <el-menu-item v-for="threeMenu in subMenu.subs" :key="threeMenu.Index" :index="threeMenu.Index">
+                <router-link :to="threeMenu.Path">{{threeMenu.Title}}</router-link>
               </el-menu-item>
             </el-submenu>
             <div v-else>
               <router-link :to="subMenu.Path">
-                <el-menu-item :index="subMenu.Index" :key="subMenu.Index">{{
-                  subMenu.Title
-                }}</el-menu-item>
+                <el-menu-item :index="subMenu.Index" :key="subMenu.Index">{{subMenu.Title}}</el-menu-item>
               </router-link>
             </div>
           </div>
         </el-submenu>
-      </div>
-      <div v-else>
+      </template>
+      <template v-else>
         <router-link :to="menu.Path">
           <el-menu-item :index="menu.Index" :key="menu.Index">
-            <i :class="menu.Icon"></i>
-            <span>{{ menu.Title }}</span>
+            <i :class="menu.Icon"></i><span>{{ menu.Title }}</span>
           </el-menu-item>
         </router-link>
-      </div>
+      </template>
     </div>
   </div>
 </template>
