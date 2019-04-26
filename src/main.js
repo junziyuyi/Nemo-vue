@@ -13,10 +13,16 @@ import App from "./App.vue";
 import * as filters from "@/filters/index";
 import router from "./router/index";
 import store from "./store/index";
+import http from "@/utils/request.js";
+
 
 Vue.use(Cookies);
 Vue.use(Element);
 Vue.use(VueMoment);
+
+[http].map((plugin) => {
+  Vue.use(plugin);
+});
 
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key]);

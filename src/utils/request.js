@@ -3,10 +3,14 @@ import { MessageBox, Message } from "element-ui";
 import store from "@/store";
 import { getToken } from "@/utils/auth";
 
+const  SUCC_CODE = "0"
+const  BASE_URL  = "http://localhost:3000/"
+
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  withCredentials: true, // send cookies when cross-domain requests
+  // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  baseURL: BASE_URL, // url = base url + request url
+  withCredentials: false, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 });
 
@@ -45,9 +49,9 @@ service.interceptors.response.use(
     const res = response.data;
 
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
+    if (res.code !== SUCC_CODE) {
       Message({
-        message: res.message || "error",
+        message: res.msg || "error",
         type: "error",
         duration: 5 * 1000
       });
@@ -69,7 +73,7 @@ service.interceptors.response.use(
           });
         });
       }
-      return Promise.reject(res.message || "error");
+      return Promise.reject(res.msg || "error");
     } else {
       return res;
     }
@@ -85,4 +89,26 @@ service.interceptors.response.use(
   }
 );
 
-export default service;
+
+var infra = {};
+
+infra.install = (Vue) => {
+  Vue.prototype.$http = {
+    Get: (url, params) => {
+      return service({
+        method: 'get',
+        url,
+        params
+      })
+    },
+    Post: (url, params) => {
+      return service({
+        method: 'post',
+        url,
+        params
+      })
+    }
+  }
+}
+
+export default infra;
