@@ -1,40 +1,52 @@
 <template>
-  <div class="sidebar-item">
-    <div v-for="menu in menus" :key="menu.Index">
-      <template v-if="menu.Subs">
-        <el-submenu :index="menu.Index" :key="menu.Index">
-          <template slot="title">
-            <i :class="menu.Icon"></i><span>{{ menu.Title }}</span>
-          </template>
-          <div v-for="subMenu in menu.Subs" :key="subMenu.Index">
-            <el-submenu v-if="subMenu.Subs" :index="subMenu.Index" :key="subMenu.Index">
-              <template slot="title">{{ subMenu.Title }}</template>
-              <el-menu-item v-for="threeMenu in subMenu.subs" :key="threeMenu.Index" :index="threeMenu.Index">
-                <router-link :to="threeMenu.Path">{{threeMenu.Title}}</router-link>
-              </el-menu-item>
-            </el-submenu>
-            <div v-else>
-              <router-link :to="subMenu.Path">
-                <el-menu-item :index="subMenu.Index" :key="subMenu.Index">{{subMenu.Title}}</el-menu-item>
-              </router-link>
+  <el-menu
+      class="menu" :class="{'flod-menu':isCollapse}"
+      :default-active="'0'"
+      :background-color="variables.MenuBG"
+      :text-color="variables.MenuText"
+      :unique-opened="false"
+      :active-text-color="variables.MenuActiveTxt"
+      :collapse-transition="false"
+      :collapse="isCollapse"
+      mode="vertical">
+      <template v-for="menu in menus">
+        <template v-if="menu.Subs">
+          <el-submenu :index="menu.Index" :key="menu.Index">
+            <template slot="title"><i :class="menu.Icon"></i><span slot="title">{{ menu.Title }}</span></template>
+            <div v-for="subMenu in menu.Subs" :key="subMenu.Index">
+              <el-submenu v-if="subMenu.Subs" :index="subMenu.Index" :key="subMenu.Index">
+                <template slot="title">{{ subMenu.Title }}</template>
+                <el-menu-item v-for="threeMenu in subMenu.subs" :key="threeMenu.Index" :index="threeMenu.Index">
+                  <router-link :to="threeMenu.Path">{{threeMenu.Title}}</router-link>
+                </el-menu-item>
+              </el-submenu>
+              <div v-else>
+                <router-link :to="subMenu.Path">
+                  <el-menu-item :index="subMenu.Index" :key="subMenu.Index">{{subMenu.Title}}</el-menu-item>
+                </router-link>
+              </div>
             </div>
-          </div>
-        </el-submenu>
+          </el-submenu>
+        </template>
+        <template v-else>
+          <router-link :to="menu.Path">
+            <el-menu-item :index="menu.Index" :key="menu.Index">
+              <i :class="menu.Icon"></i>
+              <span slot="title">{{ menu.Title }}</span>
+            </el-menu-item>
+          </router-link>
+        </template>
       </template>
-      <template v-else>
-        <router-link :to="menu.Path">
-          <el-menu-item :index="menu.Index" :key="menu.Index">
-            <i :class="menu.Icon"></i><span>{{ menu.Title }}</span>
-          </el-menu-item>
-        </router-link>
-      </template>
-    </div>
-  </div>
+    </el-menu>
 </template>
 <script>
+import Bus from "@/utils/bus.js";
+import variables from "@/assets/styles/color.scss";
+
 export default {
   data() {
     return {
+      isCollapse: false,
       menus: [
         {
           Icon: "el-icon-menu",
@@ -43,13 +55,13 @@ export default {
           Path: "/home"
         },
         {
-          Icon: "el-icon-menu",
+          Icon: "el-icon-star-on",
           Title: "站点维护",
           Index: "1",
           Path: "/site"
         },
         {
-          Icon: "el-icon-menu",
+          Icon: "el-icon-edit",
           Title: "商品管理",
           Index: "2",
           Subs: [
@@ -75,8 +87,9 @@ export default {
             }
           ]
         },
+  
         {
-          Icon: "el-icon-menu",
+          Icon: "el-icon-tickets",
           Title: "订单中心",
           Index: "3",
           Subs: [
@@ -94,6 +107,25 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    Bus.$on("menuFold", menuFold => {
+      this.isCollapse = menuFold;
+    });
+  },
+  computed: {
+    variables() {
+      return variables;
+    }
   }
 };
 </script>
+<style lang="scss" scoped>
+.menu {
+  width: 200px;
+  border-right: 0;
+}
+.flod-menu {
+  width: auto;
+}
+</style>

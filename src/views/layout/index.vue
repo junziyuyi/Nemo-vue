@@ -4,8 +4,8 @@
       <Header/>
     </el-header>
     <el-container>
-      <el-aside width="200px">
-        <Sidebar :flod="flod"/>
+      <el-aside :width="isCollapse?'auto':'200px'">
+        <Sidebar/>
       </el-aside>
       <el-main>
         <router-view/>
@@ -16,11 +16,18 @@
 <script>
 import Header from "./Header.vue";
 import Sidebar from "./sidebar.vue";
+import Bus from "@/utils/bus.js";
+
 export default {
   data() {
     return {
-      flod: false
+      isCollapse: false
     };
+  },
+  created() {
+    Bus.$on("menuFold", menuFold => {
+      this.isCollapse = menuFold;
+    });
   },
   components: { Sidebar, Header }
 };

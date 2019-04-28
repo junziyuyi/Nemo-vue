@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header-logo fl" @click="toggleMenu">
-      <i :class="fold"></i>
+      <i :class="!isCollapse?'el-icon-d-arrow-left':'el-icon-d-arrow-right'"></i>
       <span class="title">后台管理系统</span>
     </div>
   </div>
@@ -12,16 +12,12 @@ import Bus from "@/utils/bus.js";
 export default {
   data() {
     return {
-      fold: "el-icon-d-arrow-left",
       isCollapse: false
     };
   },
   methods: {
     toggleMenu() {
-    //   this.isCollapse = !this.isCollapse;
-      this.fold = this.isCollapse
-        ? "el-icon-d-arrow-left"
-        : "el-icon-d-arrow-right";
+      this.isCollapse = !this.isCollapse;
       Bus.$emit("menuFold", this.isCollapse);
     }
   }
