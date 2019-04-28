@@ -13,7 +13,7 @@ import App from "./App.vue";
 import * as filters from "@/filters/index";
 import router from "./router/index";
 import store from "./store/index";
-import http from "@/utils/request.js";
+import http from "@/utils/http";
 
 
 Vue.use(Cookies);
