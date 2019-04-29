@@ -3,8 +3,8 @@ import { MessageBox, Message } from "element-ui";
 import store from "@/store";
 import { getToken } from "@/utils/auth";
 
-const  SUCC_CODE = "0"
-const  BASE_URL  = "http://localhost:3000/"
+const SUCC_CODE = "0";
+const BASE_URL = "http://localhost:3000/";
 
 // create an axios instance
 const service = axios.create({

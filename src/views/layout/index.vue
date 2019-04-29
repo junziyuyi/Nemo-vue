@@ -1,14 +1,14 @@
 <template>
   <el-container>
     <el-header>
-      <Header/>
+      <Header />
     </el-header>
     <el-container>
-      <el-aside :width="isCollapse?'auto':'200px'">
-        <Sidebar/>
+      <el-aside :width="isCollapse ? 'auto' : '200px'">
+        <Sidebar />
       </el-aside>
       <el-main>
-        <router-view/>
+        <router-view />
       </el-main>
     </el-container>
   </el-container>

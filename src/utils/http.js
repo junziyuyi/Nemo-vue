@@ -1,24 +1,24 @@
-import service from './request'
+import service from "./request";
 
 var infra = {};
 
-infra.install = (Vue) => {
+infra.install = Vue => {
   Vue.prototype.$http = {
     Get: (url, params) => {
       return service({
-        method: 'get',
+        method: "get",
         url,
         params
-      })
+      });
     },
     Post: (url, params) => {
       return service({
-        method: 'post',
+        method: "post",
         url,
         params
-      })
+      });
     }
-  }
-}
+  };
+};
 
 export default infra;

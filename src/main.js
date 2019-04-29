@@ -15,12 +15,11 @@ import router from "./router/index";
 import store from "./store/index";
 import http from "@/utils/http";
 
-
 Vue.use(Cookies);
 Vue.use(Element);
 Vue.use(VueMoment);
 
-[http].map((plugin) => {
+[http].map(plugin => {
   Vue.use(plugin);
 });
 

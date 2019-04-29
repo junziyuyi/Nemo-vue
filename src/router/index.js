@@ -103,7 +103,7 @@ const router = new Router({
           component: resolve => require(["@/views/order/returnList"], resolve)
         },
         {
-          path: "/*",
+          path: "/order/*",
           name: "list",
           meta: {
             auth: true
@@ -119,7 +119,17 @@ const router = new Router({
         auth: true
       },
       component: resolve => {
-        require(["@/views/login.vue"], resolve);
+        require(["@/views/users/login.vue"], resolve);
+      }
+    },
+    {
+      path: "/signin",
+      name: "signin",
+      meta: {
+        auth: true
+      },
+      component: resolve => {
+        require(["@/views/users/signin.vue"], resolve);
       }
     }
   ]
