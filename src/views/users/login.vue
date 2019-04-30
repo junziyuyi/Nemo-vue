@@ -22,10 +22,10 @@
               <div class="fl">4552</div>
             </el-form-item>
             <div class="login-btn">
-              <el-button type="primary" class="el-button el-button--primary el-button--small" @click="doLogin('loginForm')">提交</el-button>
+              <el-button type="primary" class="el-button el-button--primary el-button--small" @click="doLogin('loginForm')">登录</el-button>
             </div>
           </el-form>
-          <div class="text-right signin">去注册</div>
+          <div class="text-right signin"><router-link to="/signin">去注册</router-link></div>
         </div>
       </div>
     </div>
@@ -33,6 +33,8 @@
 </template>
 <script>
 // import variables from "@/styles/variables.scss";
+import { setToken } from "@/utils/auth"; // setToken token from cookie
+import { log } from 'util';
 export default {
   data() {
     var validateName = (rule, value, callback) => {
@@ -49,14 +51,26 @@ export default {
     };
     return {
       loginForm: {
-        userName: "",
-        pass: ""
+        userName: this.$route.params.userName,
+        pass: this.$route.params.pass
       },
       rules: {
         userName: [{ validator: validateName, trigger: "blur" }],
         pass: [{ validator: validatePass, trigger: "blur" }]
-      }
+      },
+      redirect: undefined
     };
+  },
+  watch: {
+    $route: {
+      handler: function (route) {
+        this.redirect = route.query && route.query.redirect
+      },
+      immediate: true
+    }
+  },
+  created() {
+    console.log(this.$route.params)
   },
   methods: {
     doLogin(formName) {
@@ -64,7 +78,8 @@ export default {
         if (!valid) {
           return false;
         }
-        this.$router.push({ path: "/" });
+        setToken("ceshi");
+        this.$router.push({ path: this.redirect || '/' })
       });
     }
   }

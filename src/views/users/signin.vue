@@ -6,6 +6,7 @@
         <el-step title="完善信息"></el-step>
         <el-step title="完成"></el-step>
       </el-steps>
+      <p class="mess" v-if="active===3">欢迎您的加入！</p>
       <el-form ref="signinForm" :rules="rules" :model="signinForm" size="small" label-width="80px" class="signin-form">
         <el-form-item label="用户名" prop="userName" v-if="active === 1">
           <el-input name="userName" v-model="signinForm.userName" placeholder="请输入用户名"></el-input>
@@ -22,13 +23,12 @@
         <el-form-item label="验证码" prop="code" v-if="active === 2">
           <el-input name="code" v-model="signinForm.code" placeholder="请输入验证码" class="auth-code-input fl"></el-input>
         </el-form-item>
-        <div class="signin-btns">
+        <div class="signin-btns" :class="{'finish-status':active===3}">
           <el-button type="primary" class="el-button el-button--primary el-button--small" @click="prev('signinForm')"
             v-if="active > 1 && active < 3">上一步</el-button>
           <el-button type="primary" class="el-button el-button--primary el-button--small" @click="next('signinForm')"
             v-if="active < 3">下一步</el-button>
-          <el-button type="primary" class="el-button el-button--primary el-button--small" @click="next('signinForm')"
-            v-if="active == 3">登录</el-button>
+          <el-button type="primary" class="el-button el-button--primary el-button--small" @click="goBack()" v-if="active == 3">返回登录</el-button>
         </div>
       </el-form>
     </div>
@@ -115,12 +115,18 @@ export default {
     },
     sendCode() {
       var params = {};
-      params.Email = this.email;
+      params.Email = this.signinForm.email;
       this.$http.Post("/users/verify", params).then(data => {
         if (data.code == "0") {
           this.active++;
         }
       });
+    },
+    goBack() {
+      var params = {};
+      params.userName = this.signinForm.userName;
+      params.pass = this.signinForm.pass;
+      this.$router.push({ name: "login", params: params })
     }
   }
 };
@@ -137,11 +143,18 @@ export default {
   box-sizing: border-box;
   background: #f0f0f0;
 }
+.mess {
+  text-align: center;
+}
 .signin-form {
   width: 400px;
   margin: 30px auto 0;
 }
 .signin-btns {
   margin-left: 80px;
+  text-align: center;
+}
+.finish-status {
+  margin-left: 0;
 }
 </style>

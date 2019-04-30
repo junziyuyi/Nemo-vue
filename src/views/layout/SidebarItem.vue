@@ -1,43 +1,36 @@
 <template>
-  <el-menu
-      class="menu" :class="{'flod-menu':isCollapse}"
-      :default-active="'0'"
-      :background-color="variables.MenuBG"
-      :text-color="variables.MenuText"
-      :unique-opened="false"
-      :active-text-color="variables.MenuActiveTxt"
-      :collapse-transition="false"
-      :collapse="isCollapse"
-      mode="vertical">
-      <template v-for="menu in menus">
-        <template v-if="menu.Subs">
-          <el-submenu :index="menu.Index" :key="menu.Index">
-            <template slot="title"><i :class="menu.Icon"></i><span slot="title">{{ menu.Title }}</span></template>
-            <div v-for="subMenu in menu.Subs" :key="subMenu.Index">
-              <el-submenu v-if="subMenu.Subs" :index="subMenu.Index" :key="subMenu.Index">
-                <template slot="title">{{ subMenu.Title }}</template>
-                <el-menu-item v-for="threeMenu in subMenu.subs" :key="threeMenu.Index" :index="threeMenu.Index">
-                  <router-link :to="threeMenu.Path">{{threeMenu.Title}}</router-link>
-                </el-menu-item>
-              </el-submenu>
-              <div v-else>
-                <router-link :to="subMenu.Path">
-                  <el-menu-item :index="subMenu.Index" :key="subMenu.Index">{{subMenu.Title}}</el-menu-item>
-                </router-link>
-              </div>
+  <el-menu class="menu" :class="{'flod-menu':isCollapse}" :default-active="'0'" :background-color="variables.MenuBG"
+    :text-color="variables.MenuText" :unique-opened="false" :active-text-color="variables.MenuActiveTxt"
+    :collapse-transition="false" :collapse="isCollapse" mode="vertical">
+    <template v-for="menu in menus">
+      <template v-if="menu.Subs">
+        <el-submenu :index="menu.Index" :key="menu.Index">
+          <template slot="title"><i :class="menu.Icon"></i><span slot="title">{{ menu.Title }}</span></template>
+          <div v-for="subMenu in menu.Subs" :key="subMenu.Index">
+            <el-submenu v-if="subMenu.Subs" :index="subMenu.Index" :key="subMenu.Index">
+              <template slot="title">{{ subMenu.Title }}</template>
+              <el-menu-item v-for="threeMenu in subMenu.subs" :key="threeMenu.Index" :index="threeMenu.Index">
+                <router-link :to="threeMenu.Path">{{threeMenu.Title}}</router-link>
+              </el-menu-item>
+            </el-submenu>
+            <div v-else>
+              <router-link :to="subMenu.Path">
+                <el-menu-item :index="subMenu.Index" :key="subMenu.Index">{{subMenu.Title}}</el-menu-item>
+              </router-link>
             </div>
-          </el-submenu>
-        </template>
-        <template v-else>
-          <router-link :to="menu.Path">
-            <el-menu-item :index="menu.Index" :key="menu.Index">
-              <i :class="menu.Icon"></i>
-              <span slot="title">{{ menu.Title }}</span>
-            </el-menu-item>
-          </router-link>
-        </template>
+          </div>
+        </el-submenu>
       </template>
-    </el-menu>
+      <template v-else>
+        <router-link :to="menu.Path">
+          <el-menu-item :index="menu.Index" :key="menu.Index">
+            <i :class="menu.Icon"></i>
+            <span slot="title">{{ menu.Title }}</span>
+          </el-menu-item>
+        </router-link>
+      </template>
+    </template>
+  </el-menu>
 </template>
 <script>
 import Bus from "@/utils/bus.js";
@@ -87,7 +80,7 @@ export default {
             }
           ]
         },
-  
+
         {
           Icon: "el-icon-tickets",
           Title: "订单中心",
