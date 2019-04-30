@@ -15,6 +15,8 @@ import router from "./router/index";
 import store from "./store/index";
 import http from "@/utils/http";
 
+import "./permission"; // permission control
+
 Vue.use(Cookies);
 Vue.use(Element);
 Vue.use(VueMoment);

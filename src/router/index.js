@@ -13,6 +13,17 @@ const router = new Router({
       redirect: "/home"
     },
     {
+      path: "/redirect",
+      component: Layout,
+      hidden: true,
+      children: [
+        {
+          path: "/redirect/:path*",
+          component: () => import("@/views/redirect/index")
+        }
+      ]
+    },
+    {
       path: "/",
       name: "home",
       component: Layout,
